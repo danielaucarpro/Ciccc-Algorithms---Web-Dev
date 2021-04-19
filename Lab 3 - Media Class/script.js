@@ -2,35 +2,66 @@
 
 //Parent Class
 class Media {
-    constructor(author, title) {
+    constructor(_author, _title, _isCheckedOut, _ratings) {
         this.author = author; //using author as director and artist
-        this.title = title;
-        // this.isCheckedOut(boolean);
-        // this.ratings(array) = media.getAvarageRating;
+        this.title = _title;
+        this.isCheckedOut = _isCheckedOut;
+        this.rating = _ratings;
+    }
+
+    set setAuthor(author) {
+        this._author = author;
+    }
+
+    set setTitle(title) {
+        this._title = title;
+    }
+
+    set setIsCheckOut(boolean) {
+        //set the value of _isCheckedOut according to the boolean parameter
+        if (boolean === true) {
+            this._isCheckedOut = true;
+        } else if (boolean === false) {
+            this._isCheckedOut === false;
+        }
+    }
+
+    get getAuthor() {
+        return this.author;
     }
 
     get getTitle() {
         return this.title;
     }
 
-    get isCheckedOut() {
-        if (status === true) {
-            return 'Yes'
-        } else if (status === false) {
-            return 'No'
+    get getCheckedOutStatus() {
+        if (this._isCheckedOut === true) {
+            return 'You media is not avaiable.';
+        } else if (this._isCheckedOut === false) {
+            return 'You media is avaiable.';
         }
     }
 
-    get getAvarageRating() {
-        //sum array index and divide by array lenght
-        let numbers = array;
+    get getRating() {
+        return this._ratings;
+    }
+
+    toggleCheckOutStatus(boolean) {
+        if (boolean === true) {
+            this._isCheckedOut = false;
+        } else if (boolean === false) {
+            this._isCheckedOut = true;
+        }
+    }
+
+    getAvarageRating(array) {
         let lenght = array.lenght;
         let sum = 0;
 
         if (lenght === 0) {
             return 'No ratings yet';
         } else {
-            sum = numbers.reduce(getSum, 0)
+            sum = array.reduce(getSum, 0)
         }
 
         function getSum(total, num) {
@@ -38,24 +69,14 @@ class Media {
         }
 
         let avarage = sum / lenght;
-        return avarage;
+        this._ratings = avarage;
     }
 
-    set toggleCheckOutStatus(boolean) {
-        //change status to true or false
-        const status = false;
-        if (boolean === true) {
-            status === true;
-        } else if (boolean === false) {
-            this.isCheckedOut === false;
-        }
-    }
-
-    set addRating(number) {
-        //adding number into the array then passing the array to get avarage
-        let ratingArray = [];
-        ratingArray.push(number);
-        this.getAvarageRating(ratingArray);
+    addRating(number) {
+        //adding number into new array which is equal to this ratings
+        let ratings = [];
+        ratings.push(number);
+        this.getAvarageRating(ratings);
     }
 }
 
@@ -71,54 +92,118 @@ console.log(isChecked);
 //Child Classes
 //book
 class Book extends Media {
-    constructor(pages, status, rating) {
-        super(pages, status, rating);
-        this.author = 'Daniel Aucar';
+    constructor(pages, edition, year) {
+        super(pages, edition, year);
         this.pages = pages;
+        this.edition = edition;
+        this.year = year;
+    }
+
+    set setPages(newPagesNum) {
+        this.pages = newPagesNum;
+    }
+
+    set setEdition(editionToSet) {
+        this.edition = editionToSet;
+    }
+
+    set setYear(newYear) {
+        this.year = newYear;
+    }
+
+    get gerPages() {
+        return this.pages;
+    }
+
+    get getEdition() {
+        return this.edition;
+    }
+
+    get getYear() {
+        return this.year;
     }
 }
 
-const historyOfEverything = new Book();
-console.log(historyOfEverything.isCheckedOut);
+const historyOfEverthing = new Book(544, 'Third', 1991);
+historyOfEverthing.setAuthor = 'Bill Bryson';
+historyOfEverthing.setTitle = 'A Short History of Nearly Everything';
+historyOfEverthing.toggleCheckOutStatus(false);
+console.log(historyOfEverthing._isCheckedOut);
 
-historyOfEverything.addRating = 4;
-historyOfEverything.addRating = 5;
-historyOfEverything.addRating = 5;
-const averageHis = historyOfEverything.getAvarageRating();
-console.log(averageHis);
+historyOfEverthing.addRating(4);
+historyOfEverthing.addRating(5);
+historyOfEverthing.addRating(5);
+console.log(historyOfEverthing.getAvarageRating());
 
 //movie
 class Movie extends Media {
-    constructor(runTime, status, rating) {
-        super(movieData);
+    constructor(runTime, movieCast) {
+        super(runTime, movieData);
         this.runTime = runTime;
         this.movieCast = movieCast;
     }
+
+    set setMovieCast(cast) {
+        this.movieCast = cast;
+    }
+
+    set setRunTime(time) {
+        this.runTime = time;
+    }
+
+    get getRunTime() {
+        return this.runTime;
+    }
+
+    get getMovieCast() {
+        return this.movieCast;
+    }
+
+    sortMovieCast(arrayToSort) {
+        arrayToSort.sort();
+        this.movieCast = arrayToSort;
+        return this.movieCast;
+    }
 }
 
-const speed = new Movie();
-speed.author = 'Jan de Bont';
-speed.title = 'Speed';
-speed.runTime = 116;
-
+const speed = new Movie(116);
+speed.setAuthor = 'Jan de Bont';
+speed.setTitle = 'Speed';
 speed.toggleCheckOutStatus(true);
-console.log(speed.isCheckedOut());
+console.log(speed._isCheckedOut);
 
 speed.addRating(1);
 speed.addRating(1);
 speed.addRating(5);
-speed.getAvarageRating();
+console.log(speed.getAvarageRating());
+
 
 //CD
 class CD extends Media {
-    constructor(songs, status, rating) {
-        super(songs);
-        this.songs = songs;
+    constructor(songsTitles, runTime) {
+        super(songsTitles, runTime);
+        this.songsTitles = songsTitles;
+        this.runTime = runTime;
+    }
 
+    set setRunTime(time) {
+        this.runTime = time;
+    }
+
+    set setSongsTitles(array) {
+        this.songsTitles = array;
+    }
+
+    get getSongsTitles() {
+        return this.songsTitles;
+    }
+
+    get getRunTime() {
+        return this.runTime;
     }
 
     shuffle() {
-        let randomSongs = [this.songs];
+        let randomSongs = [this.songsTitles];
         let lenght = randomSongs.length;
 
         for (let i = lenght - 1; i > 0; i--) {
@@ -130,10 +215,29 @@ class CD extends Media {
 
         return randomSongs;
     }
+
+    getRunTime(array) {
+        if (typeof array[index] === 'number') {
+            let lenght = array.lenght;
+            let sum = 0;
+
+            if (lenght === 0) {
+                return 'Error. No value founded';
+            } else {
+                sum = array.reduce(getSum, 0)
+            }
+
+            function getSum(total, num) {
+                return total + num;
+            }
+
+            this.runTime = `${sum} minutes`
+        }
+    }
 }
 
 //CATALOG CLASS
 
 class Catalog {
-    
+
 }
