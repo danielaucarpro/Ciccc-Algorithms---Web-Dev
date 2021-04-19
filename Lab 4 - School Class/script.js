@@ -62,19 +62,48 @@ class School {
 //CHILD 1 - PRIMARY SCHOOL
 
 class Primary extends School {
-    constructor(pickUpPolicy) {
-        super(pickUpPolicy);
+    constructor(pickUpPolicy, uniformPolicy, foodPolicy) {
+        super(pickUpPolicy, uniformPolicy, foodPolicy);
         this._level = 'Primary';
-        this.pickUpPolicy = this.pickUpPolicy;
+        this.pickUpPolicy = pickUpPolicy;
+        this.uniformPolicy = uniformPolicy;
+        this.foodPolicy = foodPolicy;
     }
 
     set setPolicy(policyToSet) {
-        let policyToSet = [];
-        this.pickUpPolicy = policyToSet;
+        if (typeof (policyToSet) === 'string') {
+            this.pickUpPolicy = policyToSet;
+        } else {
+            return alert('Error, not a string');
+        }
+    }
+
+    set setUniformPolicy(uniform) {
+        if (typeof (uniform) === 'string') {
+            this.uniformPolicy = uniform;
+        } else {
+            return alert('Error, not a string');
+        }
+    }
+
+    set setFoodPolicy(food) {
+        if (typeof (food) === 'string') {
+            this.foodPolicy = food;
+        } else {
+            return alert('Error, not a string');
+        }
     }
 
     get getPolicy() {
         return this.pickUpPolicy;
+    }
+
+    get getUniformPolicy() {
+        return this.uniformPolicy;
+    }
+
+    get getFoodPolicy() {
+        return this.foodPolicy;
     }
 }
 
@@ -90,28 +119,73 @@ console.log(lorraineHansbuty.pickSubstituteTeacher(teacherArr));
 //CHILD 2 - MIDDLE SCHOOL
 
 class Middle extends School {
-    constructor() {
-        super();
+    constructor(languages, extraClasses) {
+        super(languages);
         this._level = 'Middle';
+        this.languages = languages;
+        this.extraClasses = extraClasses;
+    }
+
+    set setLanguages(newLanguages) {
+        if (typeof (newLanguages[index]) === 'string') {
+            this.languages = newLanguages;
+        } else {
+            return alert('Error, not a string');
+        }
+    }
+
+    set setExtraClasses(newClasses) {
+        if (typeof (newClasses[index]) === 'string') {
+            this.extraClasses = newClasses;
+        } else {
+            return alert('Error, not a string');
+        }
+    }
+
+    get getLanguages() {
+        return this.languages;
+    }
+
+    get getExtraClasses() {
+        return this.extraClasses;
     }
 }
+
+const middleSchool = new Middle();
+middleSchool.setLanguages = ['English', 'French', 'Spanish'];
+middleSchool.setExtraClasses = ['Biology', 'Paramedics', 'IT'];
+
 
 //CHILD 3 - HIGH SCHOOL
 
 class High extends School {
-    constructor(sportsTeams) {
-        super(sportsTeams);
-        this.sportsTeams = this.sportsTeams;
-
+    constructor(sportsTeams, teamsNames) {
+        super(sportsTeams, teamsNames);
+        this._level = 'High'
+        this.sportsTeams = sportsTeams;
+        this.teamsNames = teamsNames;
     }
 
     set setTeams(teams) {
-        let teams = [];
-        this.sportsTeams = teams;
+        this.sportsTeams = teams; 
+    }
+
+    set setNameOfTeams(arrayOfNames) {
+        this.teamsNames = arrayOfNames;
     }
 
     get getTeams() {
         return this.sportsTeams;
+    }
+
+    get getTeamsNames() {
+        return this.teamsNames;
+    }
+
+    sortTeamsNames(arrayToSort) {
+        arrayToSort.sort();
+        this.teamsNames = arrayToSort;
+        return this.teamsNames;
     }
 }
 

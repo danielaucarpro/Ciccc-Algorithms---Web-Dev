@@ -10,11 +10,19 @@ class Media {
     }
 
     set setAuthor(author) {
-        this._author = author;
+        if (typeof (author) === 'string') {
+            this._author = author;
+        } else {
+            return alert('Error, not a string');
+        }
     }
 
     set setTitle(title) {
-        this._title = title;
+        if (typeof (title) === 'string') {
+            this._title = title;
+        } else {
+            return alert('Error, not a string');
+        }
     }
 
     set setIsCheckOut(boolean) {
@@ -100,15 +108,27 @@ class Book extends Media {
     }
 
     set setPages(newPagesNum) {
-        this.pages = newPagesNum;
+        if (typeof (newPagesNum) === 'number') {
+            this.pages = newPagesNum;
+        } else {
+            return alert('Error, not a number');
+        }
     }
 
     set setEdition(editionToSet) {
-        this.edition = editionToSet;
+        if (typeof (editionToSet) === 'number') {
+            this.edition = editionToSet;
+        } else {
+            return alert('Error, not a number');
+        }
     }
 
     set setYear(newYear) {
-        this.year = newYear;
+        if (typeof (newYear) === 'number') {
+            this.year = newYear;
+        } else {
+            return alert('Error, not a number');
+        }
     }
 
     get gerPages() {
@@ -144,11 +164,19 @@ class Movie extends Media {
     }
 
     set setMovieCast(cast) {
-        this.movieCast = cast;
+        if (typeof (cast[index]) === 'string') {
+            this.movieCast = cast;
+        } else {
+            return alert('Error, not a string');
+        }
     }
 
     set setRunTime(time) {
-        this.runTime = time;
+        if (typeof (time) === 'number') {
+            this.runTime = time;
+        } else {
+            return alert('Error, not a number');
+        }
     }
 
     get getRunTime() {
@@ -188,6 +216,11 @@ class CD extends Media {
 
     set setRunTime(time) {
         this.runTime = time;
+        if (typeof (time) === 'number') {
+            this.runTime = time;
+        } else {
+            return alert('Error, not a number');
+        }
     }
 
     set setSongsTitles(array) {
