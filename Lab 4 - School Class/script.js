@@ -1,10 +1,10 @@
 //SCHOOL CATALOPGUE
 
 class School {
-    constructor(_name, _level, _numberOfStudents) {
-        this._name = _name;
-        this._level = _level;
-        this._numberOfStudents = _numberOfStudents;
+    constructor(name, level, numberOfStudents) {
+        this._name = name;
+        this._level = level;
+        this._numberOfStudents = numberOfStudents;
     }
 
     set setName(nameToSet) {
@@ -27,30 +27,30 @@ class School {
         if (typeof (numberToSet) === 'number') {
             this._numberOfStudents = numberToSet;
         } else {
-            return alert('ERROR. Please, type only numbers.');
+            return alert('Invalid Input: numberOfStudents must be set to a Number.');
         }
     }
 
     get getName() {
-        return this.name;
+        return this._name;
     }
 
     get getLevel() {
-        return this.level;
+        return this._level;
     }
 
     get getStudentNum() {
-        return this.numberOfStudents;
+        return this._numberOfStudents;
     }
 
     quickFacts() {
-        console.log(`${this._name} educates ${this._numberOfStudents} students at the ${this._level} school level`);
+        console.log(`${this.name} educates ${this.numberOfStudents} students at the ${this.level} school level`);
     }
 
-    pickSubstituteTeacher(subTeacher) {
+    static pickSubstituteTeacher(subTeacher) {
         let subTeacher = [];
         let lenght = subTeacher.lenght;
-        let teacher = Math.floor(Math.random() * lenght - 1);
+        const teacher = Math.floor(Math.random() * lenght - 1);
 
         return subTeacher[teacher];
     }
@@ -62,136 +62,115 @@ class School {
 //CHILD 1 - PRIMARY SCHOOL
 
 class Primary extends School {
-    constructor(pickUpPolicy, uniformPolicy, foodPolicy) {
-        super(pickUpPolicy, uniformPolicy, foodPolicy);
-        this._level = 'Primary';
-        this.pickUpPolicy = pickUpPolicy;
-        this.uniformPolicy = uniformPolicy;
-        this.foodPolicy = foodPolicy;
+    constructor(name, numberOfStudents, pickUpPolicy) {
+        super(name, 'Primary', numberOfStudents);
+        this._pickUpPolicy = pickUpPolicy;
     }
 
-    set setPolicy(policyToSet) {
-        if (typeof (policyToSet) === 'string') {
-            this.pickUpPolicy = policyToSet;
-        } else {
-            return alert('Error, not a string');
-        }
-    }
-
-    set setUniformPolicy(uniform) {
-        if (typeof (uniform) === 'string') {
-            this.uniformPolicy = uniform;
-        } else {
-            return alert('Error, not a string');
-        }
-    }
-
-    set setFoodPolicy(food) {
-        if (typeof (food) === 'string') {
-            this.foodPolicy = food;
-        } else {
-            return alert('Error, not a string');
-        }
-    }
-
-    get getPolicy() {
+    get pickUpPolicy() {
         return this.pickUpPolicy;
-    }
-
-    get getUniformPolicy() {
-        return this.uniformPolicy;
-    }
-
-    get getFoodPolicy() {
-        return this.foodPolicy;
     }
 }
 
-const lorraineHansbuty = new Primary();
-lorraineHansbuty.setName = "Lorraine Hansbury";
-lorraineHansbuty.setStudentsNum = 457;
-lorraineHansbuty.setPolicy = 'Student must be picked up by a parent, guardian, opr family member over ther age 13.'
+const lorraineHansbuty = new Primary('Lorraine Hansbury', 514, 'Student must be picked up by a parent, guardian, opr family member over ther age 13.');
 lorraineHansbuty.quickFacts();
-
 let teacherArr = ['Jamal Crawford', 'Lou Williams', 'J.R. Smith', 'James Harden', 'Jason Terry', 'Manu Ginobli'];
 console.log(lorraineHansbuty.pickSubstituteTeacher(teacherArr));
 
 //CHILD 2 - MIDDLE SCHOOL
 
 class Middle extends School {
-    constructor(languages, extraClasses) {
-        super(languages);
-        this._level = 'Middle';
-        this.languages = languages;
-        this.extraClasses = extraClasses;
-    }
-
-    set setLanguages(newLanguages) {
-        if (typeof (newLanguages[index]) === 'string') {
-            this.languages = newLanguages;
-        } else {
-            return alert('Error, not a string');
-        }
-    }
-
-    set setExtraClasses(newClasses) {
-        if (typeof (newClasses[index]) === 'string') {
-            this.extraClasses = newClasses;
-        } else {
-            return alert('Error, not a string');
-        }
+    constructor(name, numberOfStudents, languages, extraClasses) {
+        super(name, 'Middle', numberOfStudents);
+        this._languages = languages;
+        this._extraClasses = extraClasses;
     }
 
     get getLanguages() {
-        return this.languages;
+        return this._languages;
     }
 
     get getExtraClasses() {
-        return this.extraClasses;
+        return this._extraClasses;
     }
 }
 
-const middleSchool = new Middle();
-middleSchool.setLanguages = ['English', 'French', 'Spanish'];
-middleSchool.setExtraClasses = ['Biology', 'Paramedics', 'IT'];
+const middleSchool = new Middle('Burnaby', 642, lang, extraClasses);
+const lang = ['English', 'French', 'Spanish'];
+const extraClasses = ['Biology', 'Paramedics', 'IT'];
+console.log(middleSchool.getExtraClasses);
+console.log(middleSchool.getLanguages);
 
 
 //CHILD 3 - HIGH SCHOOL
 
 class High extends School {
-    constructor(sportsTeams, teamsNames) {
-        super(sportsTeams, teamsNames);
-        this._level = 'High'
-        this.sportsTeams = sportsTeams;
-        this.teamsNames = teamsNames;
-    }
-
-    set setTeams(teams) {
-        this.sportsTeams = teams; 
-    }
-
-    set setNameOfTeams(arrayOfNames) {
-        this.teamsNames = arrayOfNames;
+    constructor(name, numberOfStudents, sportsTeams, teamsNames) {
+        super(name, 'High', numberOfStudents);
+        this._sportsTeams = sportsTeams;
+        this._teamsNames = teamsNames;
     }
 
     get getTeams() {
-        return this.sportsTeams;
+        return this._sportsTeams;
     }
 
     get getTeamsNames() {
-        return this.teamsNames;
+        return this._teamsNames;
     }
 
     sortTeamsNames(arrayToSort) {
         arrayToSort.sort();
-        this.teamsNames = arrayToSort;
-        return this.teamsNames;
+        this._teamsNames = arrayToSort;
+        return this._teamsNames;
     }
 }
 
-const alSmith = new High();
-alSmith.setName = 'Al E. Smith';
-alSmith.setStudentsNum = 1355;
-let setTeamArr = ['Baseball', 'Basketball', 'Volleyball', 'Track and Field'];
-alSmith.setTeams = setTeamArr;
-alSmith.getTeams();
+const alSmith = new High('Al E. Smith', 415, setTeamArr, teamNames);
+const setTeamArr = ['Baseball', 'Basketball', 'Volleyball', 'Track and Field'];
+const teamNames = ['Rockets', 'Raptors', 'Flying Eagles', 'Speed Runners'];
+console.log(alSmith.getTeams());
+
+//=====================================================================================
+
+//SCHOOL CATALOG
+
+class SchoolCatalog {
+    constructor() {
+        this._primary = [];
+        this._middle = [];
+        this._high = [];
+    }
+
+    get primary() {
+        return this._primary;
+    }
+
+    get middle() {
+        return this._middle;
+    }
+
+    get high() {
+        return this._high;
+    }
+
+    addPrimary(value) {
+        //adding number into new array which is equal to this ratings
+        this.primary.push(value);
+    }
+
+    addMiddle(value) {
+        //adding number into new array which is equal to this ratings
+        this.middle.push(value);
+    }
+
+    addHigh(value) {
+        //adding number into new array which is equal to this ratings
+        this.high.push(value);
+    }
+}
+
+const schools = new SchoolCatalog(lorraineHansbuty, middleSchool, alSmith);
+const primarySchools = schools.primary();
+const middleSchools = schools.middle();
+const highSchools = schools.high();
